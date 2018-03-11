@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import HabitChart from 'Components/habits/HabitChart'
-import timeago from 'Lib/timeago'
-import _ from 'lodash'
+import HabitMeta from 'Components/habits/HabitMeta'
 
 const ListHabits = ({ data: { loading, habits } }) =>
   loading ? (
@@ -10,14 +9,9 @@ const ListHabits = ({ data: { loading, habits } }) =>
   ) : (
     <div className="habits tiles is-ancestor">
       {habits.map(habit => (
-        <div className="habit tile is-parent">
+        <div className="habit tile is-parent" key={habit.id}>
           <div className="tile is-child">
-            <h2 className="is-size-3">{habit.name}</h2>
-
-            <ul>
-              <li>description: {habit.description}</li>
-              <li>last updated: {timeago(_.last(habit.logs))}</li>
-            </ul>
+            <HabitMeta habit={habit} />
           </div>
           <div className="tile is-child">
             <HabitChart habit={habit} />

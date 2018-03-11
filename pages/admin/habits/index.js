@@ -4,7 +4,6 @@ import Layout from 'Layout'
 
 export default withData(() => (
   <Layout>
-    <h1>Habits</h1>
     <ListHabits />
   </Layout>
 ))

@@ -1,18 +1,3 @@
-import Link from 'next/link'
+import Layout from 'Layout'
 
-export default () => (
-  <div>
-    <ul>
-      <li>
-        <Link href="/admin">
-          <a>index</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/admin/habits">
-          <a>Habits</a>
-        </Link>
-      </li>
-    </ul>
-  </div>
-)
+export default () => <Layout>dashboard</Layout>
