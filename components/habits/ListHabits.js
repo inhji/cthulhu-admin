@@ -1,25 +1,31 @@
+import { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import HabitChart from 'Components/habits/HabitChart'
 import HabitMeta from 'Components/habits/HabitMeta'
 
-const ListHabits = ({ data: { loading, habits } }) =>
-  loading ? (
-    <div>loading...</div>
-  ) : (
-    <div className="habits tiles is-ancestor">
-      {habits.map(habit => (
-        <div className="habit tile is-parent" key={habit.id}>
-          <div className="tile is-child">
-            <HabitMeta habit={habit} />
+class ListHabits extends Component {
+  render () {
+    if (this.props.data.loading) {
+      return <div>loading...</div>
+    }
+
+    return (
+      <div className="habits tiles is-ancestor">
+        {this.props.data.habits.map(habit => (
+          <div className="habit tile is-parent" key={habit.id}>
+            <div className="tile is-child">
+              <HabitMeta habit={habit} refetch={this.props.data.refetch} />
+            </div>
+            <div className="tile is-child">
+              <HabitChart habit={habit} />
+            </div>
           </div>
-          <div className="tile is-child">
-            <HabitChart habit={habit} />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+        ))}
+      </div>
+    )
+  }
+}
 
 const allHabits = gql`
   query allHabits {

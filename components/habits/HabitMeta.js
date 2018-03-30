@@ -7,10 +7,12 @@ import _ from 'lodash'
 
 class HabitMeta extends Component {
   handleAdd = async () => {
-    this.props
-      .addHabitLog({ variables: { id: this.props.habit.id } })
-      .then(r => console.log('res', r))
-      .catch(e => console.log('err', e))
+    try {
+      await this.props.addHabitLog({ variables: { id: this.props.habit.id } })
+      this.props.refetch()
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   render () {
