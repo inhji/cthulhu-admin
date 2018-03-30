@@ -2,6 +2,8 @@ import { Component } from 'react'
 import fetch from 'isomorphic-fetch'
 import Navbar from './navbar'
 import pkg from '../package.json'
+import Login from './login'
+
 import '../styles/styles.scss'
 
 export default class Layout extends Component {
@@ -10,21 +12,13 @@ export default class Layout extends Component {
   }
 
   async componentWillMount () {
-    const res = await fetch('https://api.inhji.de/loggedin', {
+    const res = await fetch('https://inhji.de/api/loggedin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include'
     })
-
-    if (res.ok) {
-      const { id } = await res.json()
-
-      localStorage.setItem('CTHULHU_USER_ID', id)
-    } else {
-      localStorage.removeItem('CTHULHU_USER_ID')
-    }
 
     this.setState({ loggedIn: res.ok })
   }
@@ -42,7 +36,7 @@ export default class Layout extends Component {
               {this.state.loggedIn === null ? (
                 <div>loading</div>
               ) : this.state.loggedIn === false ? (
-                <div>unauthorized</div>
+                <Login />
               ) : (
                 this.props.children
               )}
