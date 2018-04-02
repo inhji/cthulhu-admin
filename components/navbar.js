@@ -20,6 +20,9 @@ export default () => (
       <Link href="/admin/habits">
         <a className="navbar-item">Habits</a>
       </Link>
+      <Link href="/admin/posts">
+        <a className="navbar-item">Posts</a>
+      </Link>
     </div>
   </nav>
 )

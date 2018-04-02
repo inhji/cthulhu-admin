@@ -13,6 +13,10 @@ app.prepare().then(() => {
     app.render(req, res, '/admin/habits/edit', { id: req.params.id })
   })
 
+  server.get('/admin/posts/edit/:id', (req, res) => {
+    app.render(req, res, '/admin/posts/edit', { id: req.params.id })
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })
